@@ -15,6 +15,8 @@ describe('Amazon Home Page', () => {
         await expect (expectedSearchText).toHaveTextContaining('macbook');
     });
 
+    
+
     it('Auto Suggestion', async() => {
         browser.url('/');
         const searchInput = $('#twotabsearchtextbox');
