@@ -36,3 +36,22 @@ it('TC006', asyc() => {
     await $('=Courses').saveScreenshot('./Screenshots/TTC006.png')    
 });
 
+it('TC010', async() => {
+    await browser.url('https://ultimateqa.com/filling-out-fomrs')
+    await $('.et_pb_contact_form.clearfix').$('#et_pb_contact_name_0').saveScreenshot('./Screenshots/TTC010.png')  
+    
+});
+
+it('TC011', async() => {
+    await browser.url('https://calculator-lei2istiw-102amit.vercel.app/')
+    const appWrapper = await $('div#root')
+    await browser.react$('t', {props: {name: 7}}).click()
+    await browser.react$('t', {props: {name: '*'}}).click()
+    await browser.react$('t', {props: {name: 8}}).click()
+    await browser.react$('t', {props: {name: 'equal'}}).click()
+    console.log()    
+});
+
+it('', () => {
+    
+});
