@@ -53,6 +53,7 @@ export const config = {
     //
     capabilities: [{
         browserName: 'chrome'
+        browserVersion: '122.0.6261.128'
     }],
 
     //
