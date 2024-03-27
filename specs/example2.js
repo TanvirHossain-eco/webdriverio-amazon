@@ -1,4 +1,7 @@
+/* eslint-disable wdio/no-debug */
+/* eslint-disable wdio/no-pause */
 it('TCE001', async() => {
+    await browser.maximizeWindow()
     await browser.url ('https://www.google.com')
     await browser.debug()    
     // await browser.url ('https://www.youtube.com')
@@ -7,11 +10,13 @@ it('TCE001', async() => {
 });
 // visit the url with admin access
 it('TCE002', async() => {
+    await browser.maximizeWindow()
     await browser.url ('https://admin:admin@the-internet.herokuapp.com/basic_auth')
     await browser.pause (3000)    
 });
 // get the input field & print it
 it('TCE003', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://www.saucedemo.com/')
     var multipleElements = await $$('<input />').length[0] // get all the input elements names
     console.log ("Number of elements: " + multipleElements) // print all the elements names
@@ -19,6 +24,7 @@ it('TCE003', async() => {
 });
 // get the first list item & print it
 it('TCE004', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com/')
     var anElement = await $$('<li />')[0] // get the first list element name
     console.log ("Print Element: " + await anElement.getText()) // print the first element name
@@ -26,6 +32,7 @@ it('TCE004', async() => {
 });
 // get the third menu item & print it
 it('TCE005', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://jqueryui.com/')
     var elements = await $$('.menu-item')// get the menu element 
     var element = await elements[2]      // get the menu element on index 2
@@ -34,6 +41,7 @@ it('TCE005', async() => {
 });
 // get the last menu item & print it
 it('TCE006', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://jqueryui.com/')
     var elements = await $$('.menu-item')                 // get the menu element
     var element = await elements[elements.length-1]       // get the menu element name on last index
@@ -42,6 +50,7 @@ it('TCE006', async() => {
 });
 // get all the menu items name & print it
 it('TCE007', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://jqueryui.com/')
     var elements = await $$('.menu-item')      // get the menu element name
     console.log("All Menu item names: ")
@@ -52,6 +61,7 @@ it('TCE007', async() => {
 });
 // Find all the urls links from a page & Print it
 it('TCE008', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://www.google.com/')
     var elements2 = await $$('<a />')      // get the anchor tag element 
     const result = [];
@@ -64,6 +74,7 @@ it('TCE008', async() => {
 });
 // Scroll down to
 it('TCE009', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com/')
     await browser.saveScreenshot('./Screenshots/TCE009_Before.png')
     await $('#page-footer').scrollIntoView()
@@ -72,6 +83,7 @@ it('TCE009', async() => {
 });
 // Add & Delete Elements with a single click event
 it('TCE010', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com/add_remove_elements/')
     // await browser.debug()
     await $('button=Add Element').click()
@@ -89,6 +101,7 @@ it('TCE010', async() => {
 });
 // Double click event
 it('TCE011', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://api.jquery.com/dblclick/')
     await browser.pause(3000)
     await $('.demo.code-demo').scrollIntoView()
@@ -101,6 +114,7 @@ it('TCE011', async() => {
 });
 // Right Click
 it('TCE012', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://www.saucedemo.com/')
     await $('.login_logo').click({
         button: 'right'
@@ -109,6 +123,7 @@ it('TCE012', async() => {
 });
 // Text to input field
 it('TCE013', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://jquery.com')
     await browser.debug()
     await $('[name="s"]').saveScreenshot('./Screenshots/TCE013_Before.png')
@@ -120,6 +135,7 @@ it('TCE013', async() => {
 });
 // Set value + Add Value
 it('TCE014', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://jquery.com/')
     // await browser.debug()
     await $('[name="s"]').setValue("WebdriverIO")
@@ -132,6 +148,7 @@ it('TCE014', async() => {
 });
 // Enter BackSpace
 it('TCE015', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://jquery.com/')
     await $('[name="s"]').click()
     await browser.pause(3000)
@@ -142,7 +159,8 @@ it('TCE015', async() => {
     // await browser.debug()    
 });
 // Mouse hovering
-it.only('TCE016', async() => {
+it('TCE016', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
     await $('[name="username"]').setValue("Admin")
     await browser.pause(3000)
@@ -164,8 +182,111 @@ it.only('TCE016', async() => {
     
     // await browser.debug()    
 });
+//Web page navigation with move back & forward
+it('TCE017', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://jquery.com/')
+    console.log ('First Page is: ' + await browser.getTitle())
+    await browser.pause(3000)
+    await browser.navigateTo('https://youtube.com')
+    console.log('Second Page is: ' + await browser.getTitle())
+    await browser.pause(3000)
+    await browser.back()
+    console.log('Back to: ' + await browser.getTitle())
+    await browser.pause(3000)
+    await browser.forward()
+    console.log('Forward to: ' + await browser.getTitle())
+    // await browser.debug()
+    
+    // await browser.debug()    
+});
+// Web page Refresh & Restart
+it('TCE018', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://jquery.com/')
+    await browser.debug()
+    await browser.refresh()
+    await browser.debug()
+});
+// Web page reload with different session id
+it('TCE019', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://jquery.com/')
+    console.log('Session id 1: ' + await browser.sessionId)
+    await browser.pause(3000)
+    await browser.reloadSession()
+    console.log('Session id 2: ' + await browser.sessionId)
+    // await browser.debug()
+});
+// Browser Maximize
+it('TCE020', async() => {
+    await browser.url('https://the-internet.herokuapp.com/large')
+    await $('#header-1').scrollIntoView()
+    await browser.saveScreenshot('./Screenshots/TCE020_Before.png')
+    await browser.maximizeWindow()
+    await browser.saveScreenshot('./Screenshots/TCE020_After.png')
+    // await browser.debug()
+});
+// Browser Minimize
+it('TCE021', async() => {
+    await browser.url('https://youtube.com')
+    await browser.pause(3000)
+    await browser.minimizeWindow()
+    await browser.pause(3000)
+    await browser.maximizeWindow()
+    // await browser.debug()
+});
+// Multiple Tabs on same browser windows 
+it('TCE022', async() => {
+    await browser.url('https://youtube.com')
+    await browser.pause(3000)
+    await browser.newWindow(
+        'https://google.com', 
+        'Google',
+        "width=200, height=400, resizable, scrollbrs=yes"
+        )
+    await browser.getUrl()
+    await browser.pause(3000)
+    
+    // await browser.debug()
+});
+// Switch to Window
+it('TCE023', async() => {
+    await browser.url('https://webdriver.io/')
+    await browser.getTitle()
+    await browser.pause(3000)
+    await $('a[href="https://www.mozilla.org/"]').scrollIntoView()
+    await browser.pause(5000)
+    await $('a[href="https://www.mozilla.org/"]').click()
+    await browser.pause(3000)
+    let win = await browser.getWindowHandles()
+    await browser.switchToWindow(win[1])
+    console.log(await browser.getTitle())
+    await browser.pause(3000)
+    
+    // await browser.debug()
+});
+// Switch between iFrames
+it('TCE024', async() => {
+    await browser.url('https://the-internet.herokuapp.com/iframe')
+    await browser.pause(3000)
+    await browser.switchToFrame(0)
+    await $('<p>').getText()
+    await browser.switchToParentFrame()
+    await $('<h3>').getText()
+    // await browser.debug()
+});
+// Close particular window or whole browser
+it.only('TCE025', async() => {
+    await browser.url('https://the-internet.herokuapp.com/')
+    await browser.pause(3000)
+    await browser.newWindow('https://youtube.com')
+    await browser.pause(3000)
+    await browser.closeWindow()
+    await browser.deleteSession() //close the browser window
+    await browser.pause(3000)
 
-
-
+    // await browser.debug()
+});
 
 
