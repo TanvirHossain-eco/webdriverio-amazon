@@ -252,6 +252,7 @@ it('TCE022', async() => {
 });
 // Switch to Window
 it('TCE023', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://webdriver.io/')
     await browser.getTitle()
     await browser.pause(3000)
@@ -268,6 +269,7 @@ it('TCE023', async() => {
 });
 // Switch between iFrames
 it('TCE024', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com/iframe')
     await browser.pause(3000)
     await browser.switchToFrame(0)
@@ -277,7 +279,8 @@ it('TCE024', async() => {
     // await browser.debug()
 });
 // Close particular window or whole browser
-it.only('TCE025', async() => {
+it('TCE025', async() => {
+    await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com/')
     await browser.pause(3000)
     await browser.newWindow('https://youtube.com')
@@ -288,5 +291,129 @@ it.only('TCE025', async() => {
 
     // await browser.debug()
 });
+// Alert with javascript
+// Window popup alert with single OK button
+it('TCE026', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/javascript_alerts')
+    await browser.pause(3000)
+    await $('button=Click for JS Alert').click()
+    await browser.pause(3000)
+    await browser.acceptAlert()
+    await browser.pause(3000)
+    
 
+    // await browser.debug()
+});
+// Window popup alert with Double buttons
+it('TCE027', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/javascript_alerts')
+    await browser.pause(3000)
+    await $('button=Click for JS Confirm').click()
+    await browser.pause(3000)
+    await browser.acceptAlert()
+    await browser.pause(3000)
+    await $('button=Click for JS Confirm').click()
+    await browser.pause(3000)
+    await browser.dismissAlert()
+    await browser.pause(3000)
+    
 
+    // await browser.debug()
+});
+// Window popup alert with Text input & Single button
+it('TCE028', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/javascript_alerts')
+    await browser.pause(3000)
+    await $('button=Click for JS Prompt').click()
+    await browser.pause(3000)
+    await browser.getAlertText()
+    await browser.sendAlertText("This is a JS test")
+    await browser.pause(3000)
+    await browser.acceptAlert()
+    await browser.pause(3000)
+    await $('button=Click for JS Prompt').click()
+    await browser.pause(3000)
+    await browser.getAlertText()
+    await browser.dismissAlert()
+    await browser.pause(3000)
+    
+    // await browser.debug()
+});
+// Drop down menus & select options
+it('TCE028', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/dropdown')
+    await browser.pause(3000)
+    await $('#dropdown').selectByAttribute('value', '1')
+    await browser.pause(3000)
+    await $('#dropdown').selectByIndex(2)
+    await browser.pause(3000)
+    await $('#dropdown').selectByVisibleText('Option 1')
+    
+    await browser.pause(3000)
+    
+    
+    // await browser.debug()
+});
+// Drag & Drop a Particular Element
+it('TCE029', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://jqueryui.com/resources/demos/droppable/default.html')
+    await browser.pause(3000)
+    await $('#draggable').dragAndDrop(await $('#droppable'))
+    await browser.pause(4000)
+      
+    
+    // await browser.debug()
+});
+// Upload Files
+it('TCE030', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/upload')
+    await browser.pause(3000)
+    await $('#file-upload').addValue("C:/Users/Hp/Desktop/Echologyx QA Materials/QA Automation/NodeJS/webdriverio-amazon/screenshots/TTC001.png")
+    await browser.pause(4000)
+    await $('#file-submit').click()
+    await browser.pause(4000)
+    
+    // await browser.debug()
+});
+// Handling Cookies
+it('TCE031', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/')
+    await browser.pause(3000)
+    console.log(await browser.getCookies()) // Print all cookies
+    console.log("#################") // Use Separator
+    await browser.deleteCookies(['optimizelyBuckets']) // Delete all the cookies have the values
+    console.log(await browser.getCookies()) // Print whats left
+    await browser.pause(4000)
+    
+    // await browser.debug()
+});
+// Handling Cookies
+it('TCE032', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/')
+    await browser.pause(3000)
+    console.log(await browser.getCookies()) // Print all cookies
+    console.log("#################") // Use Separator
+    await browser.setCookies([
+        {
+            name: 'cookie 1',
+            value: 'one'
+        }, 
+        {
+            name: 'cookie 2',
+            value: 'two'
+        }   
+    ])
+    console.log("#################") // Use Separator
+    console.log(await browser.getCookies()) // All New
+    await browser.pause(4000)
+    
+    // await browser.debug()
+});
