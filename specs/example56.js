@@ -161,13 +161,65 @@ it('TCE511', async() => {
     // await browser.debug()
 });
 // Check button is clickable with assertion
-it.only('TCE512', async() => {
+it('TCE512', async() => {
     await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com/dynamic_loading/1')
     var btn2 = await $("button=Start")
     console.log("Check if clickable")
     await expect(btn2).toBeClickable()
     
-    
     // await browser.debug()
+});
+// WebdriverIO Methods
+// Focused Elements
+it('TCE601', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/inputs')
+    await browser.pause(3000)
+    var input1 = await $('input[type="number"]')
+    console.log("Not Checked")
+    console.log(await input1.isFocused())
+    await browser.pause(3000)
+    await input1.click()
+    console.log("Checked")
+    console.log(await input1.isFocused())
+    await browser.pause(3000)
+    // await browser.debug()
+
+});
+// Focused Elements with assertion
+it.only('TCE602', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/inputs')
+    await browser.pause(3000)
+    var input1 = await $('input[type="number"]')
+    console.log("Not Checked")
+    await expect(input1).toBeFocused()
+    // console.log(await input1.isFocused())
+    await browser.pause(3000)
+    await input1.click()
+    console.log("Checked")
+    await expect(input1).toBeFocused()
+    // console.log(await input1.isFocused())
+    await browser.pause(3000)
+    // await browser.debug()
+
+});
+// Check Attributes 
+it.only('TCE603', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/inputs')
+    await browser.pause(3000)
+    var input1 = await $('input[type="number"]')
+    console.log("Not Checked")
+    await expect(input1).toBeFocused()
+    // console.log(await input1.isFocused())
+    await browser.pause(3000)
+    await input1.click()
+    console.log("Checked")
+    await expect(input1).toBeFocused()
+    // console.log(await input1.isFocused())
+    await browser.pause(3000)
+    // await browser.debug()
+
 });
