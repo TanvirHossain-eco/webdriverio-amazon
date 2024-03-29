@@ -60,8 +60,8 @@ it('TCE504', async() => {
     await expect(elem504).toBeEnabled()
     // await browser.debug()
 });
-// Check if Element is visible
-it.only('TCE505', async() => {
+// Check enabled or disabled with assertion
+it('TCE505', async() => {
     await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com/dynamic_controls')
     var elem503 = await $('input[type="text"]')
@@ -72,5 +72,102 @@ it.only('TCE505', async() => {
     var elem504 = await $('input[type="text"]')
     console.log("Check if enabled after click")
     await expect(elem504).toBeEnabled()
+    // await browser.debug()
+});
+// Check if Element is visible
+it('TCE506', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/dynamic_loading/1')
+    await $('button=Start').click()
+    var elem505 = await $('#finish')
+    console.log("After Clicking Start")
+    console.log(await elem505.isDisplayed())
+    await browser.pause(8000)
+    console.log("8 Seconds After Clicking Start")
+    console.log (await elem505.isDisplayed())
+    
+    // await browser.debug()
+});
+// Check if Element is visible with assertion
+it('TCE507', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/dynamic_loading/1')
+    var elem506 = await $('#finish')
+    console.log("After Clicking Start")
+    // await $('button=Start').click()
+    await expect(elem506).toBeDisplayed()
+    
+    // console.log(await elem505.isDisplayed())
+    // await browser.pause(8000)
+    // console.log("8 Seconds After Clicking Start")
+    // console.log (await elem505.isDisplayed())
+    
+    // await browser.debug()
+});
+// Check if Element is visible on the viewport with assertion
+it('TCE508', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/')
+    var elem507 = await $('=A/B Testing')
+    await expect(elem507).toBeDisplayedInViewport()
+    var elem508 = await $('=WYSIWYG Editor')
+    await $('#page-footer').scrollIntoView()
+    await browser.pause(3000)
+    await expect(elem508).toBeDisplayedInViewport()
+    
+    // await browser.debug()
+});
+// Check if checkbox is selected or not
+it('TCE509', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/checkboxes')
+    var checkbox1 = await $$('input[type="checkbox"]')[0]
+    // await browser.pause(3000)
+    console.log("Verify first checkbox")
+    console.log(await checkbox1.isSelected())
+    // await browser.pause(3000)
+    var checkbox2 = await $$('input[type="checkbox"]')[1]
+    console.log("Verify second checkbox")
+    console.log(await checkbox2.isSelected())
+    
+    // await browser.debug()
+});
+// Check if checkbox is selected or not with assertion
+it('TCE510', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/checkboxes')
+    var checkbox3 = await $$('input[type="checkbox"]')[0]
+    // await browser.pause(3000)
+    console.log("Verify first checkbox")
+    await expect(checkbox3).toBeSelected()
+    // console.log(await checkbox3.isSelected())
+    // await browser.pause(3000)
+    var checkbox4 = await $$('input[type="checkbox"]')[1]
+    console.log("Verify second checkbox")
+    await expect(checkbox4).toBeSelected()
+    // console.log(await checkbox4.isSelected())
+    
+    // await browser.debug()
+});
+// Check button is clickable with assertion
+it('TCE511', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://html.com/attributes/button-disabled/')
+    var btn1 = await $("button=You can't click me.")
+    console.log("Check if clickable")
+    await expect(btn1).toBeClickable()
+    
+    
+    // await browser.debug()
+});
+// Check button is clickable with assertion
+it.only('TCE512', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/dynamic_loading/1')
+    var btn2 = await $("button=Start")
+    console.log("Check if clickable")
+    await expect(btn2).toBeClickable()
+    
+    
     // await browser.debug()
 });
