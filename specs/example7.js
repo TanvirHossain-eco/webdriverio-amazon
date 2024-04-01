@@ -34,7 +34,7 @@ it('TCE703', async() => {
 
 });
 // Getting Element Property - CSS Property
-it.only('TCE704', async() => {
+it('TCE704', async() => {
     await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com/login')
     await browser.pause(3000)
@@ -49,7 +49,61 @@ it.only('TCE704', async() => {
 
 });
 // Getting Elements Tag, Size & Location
+it('TCE705', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://www.saucedemo.com/')
+    await browser.pause(3000)
+    await $('#user-name').getText()
+    await browser.pause(3000)
 
+    // await browser.debug()
+
+});
+
+it('TCE706', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com')
+    await browser.pause(3000)
+    const logo706 = await $('<img>')
+    const location706 = await logo706.getLocation()
+    console.log('Location: '+ await location706)
+
+    const logo_x = await logo706.getLocation('x')
+    console.log('Location X: '+ await logo_x)
+    const logo_y = await logo706.getLocation('y')
+    console.log('Location Y: '+ await logo_y)
+    await browser.pause(3000)
+
+    // await browser.debug()
+
+});
+//  Get the size of a logo
+it('TCE707', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com')
+    await browser.pause(3000)
+    const logo707 = await $('<img>')
+    const size707 = await logo707.getSize()
+    const width707 = await logo707.getSize('width')
+    console.log('Width: '+ await width707)
+    const height707 = await logo707.getSize('height')
+    console.log('Height: '+ await height707)
+    await browser.pause(3000)
+
+    // await browser.debug()
+
+});
+
+it.only('TCE708', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com')
+    await browser.pause(3000)
+    console.log("Image HTML is: " + await $('<img>').getHTML())
+    await browser.pause(3000)
+
+    // await browser.debug()
+
+});
 
 
 
