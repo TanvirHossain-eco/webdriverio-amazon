@@ -188,7 +188,7 @@ it('TCE601', async() => {
 
 });
 // Focused Elements with assertion
-it.only('TCE602', async() => {
+it('TCE602', async() => {
     await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com/inputs')
     await browser.pause(3000)
@@ -205,21 +205,87 @@ it.only('TCE602', async() => {
     // await browser.debug()
 
 });
-// Check Attributes 
-it.only('TCE603', async() => {
+// Check Attributes with Assertion - to have attribute
+it('TCE603', async() => {
     await browser.maximizeWindow()
-    await browser.url('https://the-internet.herokuapp.com/inputs')
+    await browser.url('https://the-internet.herokuapp.com/status_codes')
     await browser.pause(3000)
-    var input1 = await $('input[type="number"]')
-    console.log("Not Checked")
-    await expect(input1).toBeFocused()
-    // console.log(await input1.isFocused())
-    await browser.pause(3000)
-    await input1.click()
-    console.log("Checked")
-    await expect(input1).toBeFocused()
-    // console.log(await input1.isFocused())
+    var elem603 = await $('=200')
+    await expect(elem603).toHaveAttribute('href', 'status_codes/200')
     await browser.pause(3000)
     // await browser.debug()
 
 });
+// Check Attributes with Assertion - to have attribute containing
+it('TCE604', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/broken_images')
+    await browser.pause(3000)
+    var image604 = await $$('<img>')[3]
+    await expect(image604).toHaveAttributeContaining('src', '.jpg')
+    await browser.pause(3000)
+    // await browser.debug()
+
+});
+// Project 1: Orange HR
+// Log in & Assert the logo attribute & logo element CSS width property 
+it('HR_TCE605', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://opensource-demo.orangehrmlive.com/')
+    await browser.pause(3000)
+    await $('[name="username"]').setValue('Admin')
+    await $('[name="password"]').setValue('admin123')
+    await $('.orangehrm-login-button').click()
+    await browser.pause(3000)
+    var logo605 = await $('img[src*="logo"]')
+    await expect(logo605).toHaveAttribute('alt', 'client brand banner')
+    await expect(logo605).toHaveElementProperty('width', 182) // CSS width Property
+    await expect(logo605).toHaveElementProperty('height', 50) // CSS width Property
+    await browser.pause(3000)
+    // await browser.debug()
+
+});
+// Log in and assign leave
+it.only('HR_TCE606', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    await browser.pause(3000)
+    await $('[name="username"]').setValue('Admin')
+    await $('[name="password"]').setValue('admin123')
+    await $('.orangehrm-login-button').click()
+    await browser.pause(3000)
+    await $('[title="Assign Leave"]').moveTo()
+    await $('[title="Assign Leave"]').click()
+    await browser.pause(3000)
+    await $('.oxd-autocomplete-wrapper').click()
+    await browser.keys("Amelia  Brown")
+    await browser.pause(3000)
+    await $('.oxd-select-wrapper').click()
+    if(await $('.oxd-select-wrapper').isExisting()){
+        await browser.keys("\uE015") // Code for down arrow
+        await browser.keys("\uE015")
+        await browser.keys("\uE015")
+        await browser.keys("\uE015")
+        await browser.keys("\uE007") // Code for Enter Key
+        await browser.pause(3000)
+        var leave_type = await $('.oxd-select-wrapper')
+        await expect(leave_type).toHaveTextContaining("Personal")
+    }
+    // Set "From" date
+    const fromDateInput = await $('.oxd-grid-item.oxd-grid-item--gutters:has([placeholder="yyyy-dd-mm"]):nth-child(1) [placeholder="yyyy-dd-mm"]')
+    await fromDateInput.setValue('2024-01-04')
+    await browser.pause(3000)
+    // Set "To" date
+    const toDateInput = await $('.oxd-grid-item.oxd-grid-item--gutters:has([placeholder="yyyy-dd-mm"]):nth-child(2) [placeholder="yyyy-dd-mm"]')
+    await toDateInput.clearValue()
+    await toDateInput.setValue('2024-05-04')
+
+
+
+
+    await browser.pause(3000)
+    // await browser.debug()
+
+});
+
+
