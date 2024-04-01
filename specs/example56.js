@@ -246,7 +246,7 @@ it('HR_TCE605', async() => {
 
 });
 // Log in and assign leave
-it.only('HR_TCE606', async() => {
+it('HR_TCE606', async() => {
     await browser.maximizeWindow()
     await browser.url('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
     await browser.pause(3000)
@@ -287,5 +287,3 @@ it.only('HR_TCE606', async() => {
     // await browser.debug()
 
 });
-
-
