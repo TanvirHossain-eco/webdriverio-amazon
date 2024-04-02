@@ -104,13 +104,40 @@ it('TCE708', async() => {
     // await browser.debug()
 
 });
-// Hard Wait or Sleep
-it.only('TCE801', async() => {
+// Hard Sleep or browser.pause
+it('TCE801', async() => {
     await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com/dynamic_loading/1')
     await $('button=Start').click()
     await browser.pause(10000)
     console.log(await $('#finish').$('<h4 />').getText())
+
+});
+// Explicit Wait - wait until element is active or enable
+it('TCE802', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://output.jsbin.com/gecequg')
+    var field802 = await $('#MY_ID')
+    await field802.waitForClickable()
+    await field802.click()
+    console.log("Result: "+ await $('#demo').getText())
+    await browser.pause(3000)
+    
+
+});
+
+// Explicit Wait - wait until element is active or enable
+it.only('TCE803', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/dynamic_loading/1')
+    await $('button=Start').click()
+    var field803 = await $('#finish')
+    await field803.waitForClickable({
+        timeout: 10000
+    })
+    console.log("Result: "+ await $('#finish').$('<h4 />').getText())
+    await browser.pause(3000)
+    
 
 });
 
