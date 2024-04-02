@@ -1,5 +1,26 @@
 export const config = {
+    // Default time out
+    waitforTimeout: 16000,
     //
+    // Mocha Timeout
+    framework: 'mocha',
+    mochaOpts:{
+        timeout: 15000
+    },
+
+    // Jasmine Timeout
+    // eslint-disable-next-line no-dupe-keys
+    framework: 'jasmine',
+    jasmineOpts:{
+        defaultTimeoutInterval: 15000
+    },
+
+    // Jasmine Timeout
+    // eslint-disable-next-line no-dupe-keys
+    framework: 'cucumber',
+    cucumberOpts:{
+        timeout: 15000
+    },
     // ====================
     // Runner Configuration
     // ====================
