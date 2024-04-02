@@ -127,7 +127,7 @@ it('TCE802', async() => {
 });
 
 // Explicit Wait - wait until element is active or enable
-it.only('TCE803', async() => {
+it('TCE803', async() => {
     await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com/dynamic_loading/1')
     await $('button=Start').click()
@@ -138,7 +138,62 @@ it.only('TCE803', async() => {
     console.log("Result: "+ await $('#finish').$('<h4 />').getText())
     await browser.pause(3000)
     
-
+});
+// Wait until element is disappeared
+it('TCE804', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://output.jsbin.com/zivalup')
+    await browser.saveScreenshot('./Screenshots/TCE804_Before.png')
+    const elem804 = await $('#mydiv')
+    await elem804.waitForDisplayed({
+        reverse: true
+    })
+    await browser.saveScreenshot('./Screenshots/TCE804_After.png')
+    
+});
+// Wait Until
+it('TCE805', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/dynamic_controls')
+    var elem805 = await $('input[type="text"]')
+    await $('button=Enable').click()
+    await elem805.waitForEnabled({
+        reverse: true,
+        timeout: 10000        
+    })
+    console.log("Result: " + await $('#message').getText())
+        
+});
+// To check whether the button exist or not
+it('TCE806', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/dynamic_loading/2')
+    await browser.pause(3000)
+    var elem806 = await $('#finish')
+    await $('button=Start').click()
+    await elem806.waitForExist({
+        timeout: 10000
+    })
+    console.log("Result: " + (await $('#finish').$('<h4 />')).getText())
+            
+});
+// Implicit & Explicit wait
+it.only('TCE807', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/dynamic_loading/2')
+    await browser.pause(3000)
+    await $('button=Start').click()
+    var elem807 = await $('#finish')
+    await browser.waitUntil(function (){
+        return (elem807.isDisplayed())
+    },{
+        timeout: 10000,
+        timeoutMsg: 'Different text expected after 1s',
+        interval: 100
+    })
+    
+    console.log("Result: " + (await $('#finish').$('<h4 />')).getText())
+            
 });
 
 
