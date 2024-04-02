@@ -94,7 +94,7 @@ it('TCE707', async() => {
 
 });
 
-it.only('TCE708', async() => {
+it('TCE708', async() => {
     await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com')
     await browser.pause(3000)
@@ -104,6 +104,17 @@ it.only('TCE708', async() => {
     // await browser.debug()
 
 });
+// Hard Wait or Sleep
+it.only('TCE801', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com/dynamic_loading/1')
+    await $('button=Start').click()
+    await browser.pause(10000)
+    console.log(await $('#finish').$('<h4 />').getText())
+
+});
+
+
 
 
 
