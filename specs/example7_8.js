@@ -178,7 +178,7 @@ it('TCE806', async() => {
             
 });
 // Implicit & Explicit wait
-it.only('TCE807', async() => {
+it('TCE807', async() => {
     await browser.maximizeWindow()
     await browser.url('https://the-internet.herokuapp.com/dynamic_loading/2')
     await browser.pause(3000)
