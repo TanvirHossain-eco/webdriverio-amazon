@@ -1,9 +1,14 @@
 /* eslint-disable wdio/no-pause */
+const assert = require('chai').assert
+// const LoginPage = require('../pageobjects/login.page')
+// const SecurePage = require('../pageobjects/secure.page')
 // Getting and Setting Timeouts
 // Get/Set Timeouts
 // Implicit wait - browser session wait
 // Explicit wait - specific wait added to a wait method such as waitForExist...
 // Implicit and Explicit wait get added together
+
+
 it('TCE901', async() => {
     await browser.maximizeWindow()
     await browser.url('https://webdriver.io')
@@ -39,5 +44,10 @@ it('TCE905', async() => {
          
 });
 
-
+it.only ('TCE1003', async() => {
+    await browser.maximizeWindow()
+    await browser.url('https://the-internet.herokuapp.com')
+    var elem1003 = await $('<h2>').getAttribute('name')
+    assert.equal(elem1003, 'Available Examples', 'Error: Mismatch')
+});
 

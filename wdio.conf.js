@@ -1,26 +1,26 @@
 export const config = {
-    // Default time out
-    waitforTimeout: 16000,
-    //
-    // Mocha Timeout
-    framework: 'mocha',
-    mochaOpts:{
-        timeout: 15000
-    },
+    // // Default time out
+    // waitforTimeout: 16000,
+    // //
+    // // Mocha Timeout
+    // framework: 'mocha',
+    // mochaOpts:{
+    //     timeout: 15000
+    // },
 
-    // Jasmine Timeout
-    // eslint-disable-next-line no-dupe-keys
-    framework: 'jasmine',
-    jasmineOpts:{
-        defaultTimeoutInterval: 15000
-    },
+    // // Jasmine Timeout
+    // // eslint-disable-next-line no-dupe-keys
+    // framework: 'jasmine',
+    // jasmineOpts:{
+    //     defaultTimeoutInterval: 15000
+    // },
 
-    // Jasmine Timeout
-    // eslint-disable-next-line no-dupe-keys
-    framework: 'cucumber',
-    cucumberOpts:{
-        timeout: 15000
-    },
+    // // Jasmine Timeout
+    // // eslint-disable-next-line no-dupe-keys
+    // framework: 'cucumber',
+    // cucumberOpts:{
+    //     timeout: 15000
+    // },
     // ====================
     // Runner Configuration
     // ====================
@@ -109,6 +109,7 @@ export const config = {
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
     baseUrl: 'https://www.amazon.com/',
+    // baseUrl: 'https://the-internet.herokuapp.com/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
