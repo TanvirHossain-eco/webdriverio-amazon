@@ -44,10 +44,25 @@ it('TCE905', async() => {
          
 });
 
-it.only ('TCE1003', async() => {
-    await browser.maximizeWindow()
-    await browser.url('https://the-internet.herokuapp.com')
-    var elem1003 = await $('<h2>').getAttribute('name')
-    assert.equal(elem1003, 'Available Examples', 'Error: Mismatch')
+describe('My Login Page', () => {
+    it('TCE1001', async() => {
+        assert('123' == 123, 'Error: Mismatch')
+    });
+
+    it('TCE1002', async() => {
+        assert.isOk(1, "Error:-")
+    });
+
+    it('TCE1003', async() => {
+        await browser.maximizeWindow()
+        await browser.url('https://the-internet.herokuapp.com')
+        var elem1003 = await $('<h2>').getAttribute('name')
+        assert.equal(elem1003, 'Available Examples', 'Error: Mismatch')
+    });
 });
+
+
+   
+
+
 
