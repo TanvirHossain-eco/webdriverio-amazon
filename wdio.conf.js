@@ -1,26 +1,6 @@
+const allure = require('allure-commandline') // Defining Allure Package - Modified by Tanvir
 export const config = {
-    // // Default time out
-    // waitforTimeout: 16000,
-    // //
-    // // Mocha Timeout
-    // framework: 'mocha',
-    // mochaOpts:{
-    //     timeout: 15000
-    // },
-
-    // // Jasmine Timeout
-    // // eslint-disable-next-line no-dupe-keys
-    // framework: 'jasmine',
-    // jasmineOpts:{
-    //     defaultTimeoutInterval: 15000
-    // },
-
-    // // Jasmine Timeout
-    // // eslint-disable-next-line no-dupe-keys
-    // framework: 'cucumber',
-    // cucumberOpts:{
-    //     timeout: 15000
-    // },
+    //
     // ====================
     // Runner Configuration
     // ====================
@@ -38,13 +18,11 @@ export const config = {
     // worker process. In order to have a group of spec files run in the same worker
     // process simply enclose them in an array within the specs array.
     //
-    // If you are calling `wdio` from an NPM script (see https://docs.npmjs.com/cli/run-script),
-    // then the current working directory is where your `package.json` resides, so `wdio`
-    // will be called from there.
+    // The path of the spec files will be resolved relative from the directory of
+    // of the config file unless it's absolute.
     //
     specs: [
-        // ToDo: define location for spec files here
-        'specs/**/*.js'
+        './test/specs/**/*.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -73,8 +51,8 @@ export const config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-        browserName: 'chrome'
-        // browserVersion: '122.0.6261.128'
+        // capabilities for local browser web tests
+        browserName: 'chrome' // or "firefox", "microsoftedge", "safari"
     }],
 
     //
@@ -108,8 +86,7 @@ export const config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://www.amazon.com/',
-    // baseUrl: 'https://the-internet.herokuapp.com/',
+    // baseUrl: 'http://localhost:8080',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -134,6 +111,7 @@ export const config = {
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
     framework: 'mocha',
+    
     //
     // The number of times to retry the entire specfile when it fails as a whole
     // specFileRetries: 1,
@@ -147,16 +125,27 @@ export const config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    // reporters: ['spec'],
 
-    
-    //
+    // ===================================================================
+    // Spec & Allure Reports Configuration - Modified by Tanvir
+    // ===================================================================
+    reporters: ['spec', ['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: false, // Step Reporting - Set to False Manually
+        disableWebdriverScreenshotsReporting: false, // Screenshots Reporting - Set to False Manually
+    }]],
+
+
+
+
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000
     },
+
     //
     // =====
     // Hooks
@@ -173,7 +162,7 @@ export const config = {
     // onPrepare: function (config, capabilities) {
     // },
     /**
-     * Gets executed before a worker process is spawned and can be used to initialise specific service
+     * Gets executed before a worker process is spawned and can be used to initialize specific service
      * for that worker as well as modify runtime environments in an async fashion.
      * @param  {string} cid      capability id (e.g 0-0)
      * @param  {object} caps     object containing capabilities for session that will be spawn in the worker
@@ -233,13 +222,13 @@ export const config = {
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)
      */
-    // beforeHook: function (test, context) {
+    // beforeHook: function (test, context, hookName) {
     // },
     /**
      * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
      * afterEach in Mocha)
      */
-    // afterHook: function (test, context, { error, result, duration, passed, retries }) {
+    // afterHook: function (test, context, { error, result, duration, passed, retries }, hookName) {
     // },
     /**
      * Function to be executed after a test (in Mocha/Jasmine only)
@@ -297,11 +286,47 @@ export const config = {
      */
     // onComplete: function(exitCode, config, capabilities, results) {
     // },
+    // =======================================================================
+    // For Auto Generating Allure Reports Configuration - Modified by Tanvir
+    // =======================================================================
+    onComplete: function() {
+        const reportError = new Error('Could not generate Allure report')
+        const generation = allure(['generate', 'allure-results', '--clean'])
+        return new Promise((resolve, reject) => {
+            const generationTimeout = setTimeout(
+                () => reject(reportError),
+                5000)
+
+            generation.on('exit', function(exitCode) {
+                clearTimeout(generationTimeout)
+
+                if (exitCode !== 0) {
+                    return reject(reportError)
+                }
+
+                console.log('Allure report successfully generated')
+                resolve()
+            })
+        })
+    },
+    
     /**
     * Gets executed when a refresh happens.
     * @param {string} oldSessionId session ID of the old session
     * @param {string} newSessionId session ID of the new session
     */
     // onReload: function(oldSessionId, newSessionId) {
+    // }
+    /**
+    * Hook that gets executed before a WebdriverIO assertion happens.
+    * @param {object} params information about the assertion to be executed
+    */
+    // beforeAssertion: function(params) {
+    // }
+    /**
+    * Hook that gets executed after a WebdriverIO assertion happened.
+    * @param {object} params information about the assertion that was executed, including its results
+    */
+    // afterAssertion: function(params) {
     // }
 }

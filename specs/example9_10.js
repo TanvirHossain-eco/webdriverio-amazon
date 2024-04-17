@@ -8,40 +8,43 @@ const assert = require('chai').assert
 // Explicit wait - specific wait added to a wait method such as waitForExist...
 // Implicit and Explicit wait get added together
 
+describe('Test Suite', () => {
+    
 
-it('TCE901', async() => {
-    await browser.maximizeWindow()
-    await browser.url('https://webdriver.io')
-    await browser.setTimeouts(5000, 8000, 4000) // setTimeout (implicit, pageload, script)
-    console.log("Timeout: " + await browser.getTimeouts())        
-});
-// Declaring timeouts specifically Implicit Wait - browser session wait
-it('TCE902', async() => {
-    await browser.maximizeWindow()
-    await browser.url('https://webdriver.io')
-    await browser.setTimeout({'implicit': 7000 }) // setTimeout (implicit, pageload, script)
-    console.log("Timeout: " + await browser.getTimeouts())        
-});
-// pageLoad wait
-it('TCE903', async() => {
-    await browser.maximizeWindow()
-    await browser.url('https://github.com')
-    await browser.setTimeout({'pageLoad': 2000 }) // setTimeout (implicit, pageload, script)
-    console.log("Timeout: " + await browser.getTimeouts())        
-});
-// script wait
-it('TCE904', async() => {
-    await browser.maximizeWindow()
-    await browser.url('https://github.com')
-    await browser.setTimeout({'script': 1000 }) // setTimeout (implicit, pageload, script)
-    console.log("Timeout: " + await browser.getTimeouts())        
-});
-// WebdriverIO Timeouts
-it('TCE905', async() => {
-    await browser.maximizeWindow()
-    await browser.url('https://the-internet.herokuapp.com')
-    await $('<h3 />').waitForExist({timeout: 10000})
-         
+    it('TCE901', async() => {
+        await browser.maximizeWindow()
+        await browser.url('https://webdriver.io')
+        await browser.setTimeouts(5000, 8000, 4000) // setTimeout (implicit, pageload, script)
+        console.log("Timeout: " + await browser.getTimeouts())        
+    });
+    // Declaring timeouts specifically Implicit Wait - browser session wait
+    it('TCE902', async() => {
+        await browser.maximizeWindow()
+        await browser.url('https://webdriver.io')
+        await browser.setTimeout({'implicit': 7000 }) // setTimeout (implicit, pageload, script)
+        console.log("Timeout: " + await browser.getTimeouts())        
+    });
+    // pageLoad wait
+    it('TCE903', async() => {
+        await browser.maximizeWindow()
+        await browser.url('https://github.com')
+        await browser.setTimeout({'pageLoad': 2000 }) // setTimeout (implicit, pageload, script)
+        console.log("Timeout: " + await browser.getTimeouts())        
+    });
+    // script wait
+    it('TCE904', async() => {
+        await browser.maximizeWindow()
+        await browser.url('https://github.com')
+        await browser.setTimeout({'script': 1000 }) // setTimeout (implicit, pageload, script)
+        console.log("Timeout: " + await browser.getTimeouts())        
+    });
+    // WebdriverIO Timeouts
+    it('TCE905', async() => {
+        await browser.maximizeWindow()
+        await browser.url('https://the-internet.herokuapp.com')
+        await $('<h3 />').waitForExist({timeout: 10000})
+            
+    });
 });
 
 describe('My Login Page', () => {
@@ -59,7 +62,18 @@ describe('My Login Page', () => {
         var elem1003 = await $('<h2>').getAttribute('name')
         assert.equal(elem1003, 'Available Examples', 'Error: Mismatch')
     });
+
+    it.only('TCE1005', async() => {
+        await browser.maximizeWindow()
+        await browser.url('https://the-internet.herokuapp.com')
+        var elem1005 = await $$('<a>').length 
+        assert.isAbove(elem1005, 100, 'Error: The list of elements should be higher than 100')
+    });
+
 });
+
+
+
 
 
    
