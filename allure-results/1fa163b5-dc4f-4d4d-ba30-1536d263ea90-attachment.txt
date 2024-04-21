@@ -1,0 +1,4 @@
+{
+  "using": "css selector",
+  "value": "#MY_ID"
+}

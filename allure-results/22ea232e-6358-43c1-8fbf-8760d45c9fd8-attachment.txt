@@ -1,0 +1,9 @@
+{
+  "script": "return (function isFocused(elem) {\n    return elem === document.activeElement;\n}).apply(null, arguments)",
+  "args": [
+    {
+      "element-6066-11e4-a52e-4f735466cecf": "f.EF1BBCBF9CEEA1C8A98F9327A8F59D6E.d.9C40CC36395472FA930E86A49E4A1E29.e.11",
+      "ELEMENT": "f.EF1BBCBF9CEEA1C8A98F9327A8F59D6E.d.9C40CC36395472FA930E86A49E4A1E29.e.11"
+    }
+  ]
+}

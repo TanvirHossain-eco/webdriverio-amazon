@@ -1,0 +1,9 @@
+{
+  "script": "return (function isElementInViewport(elem) {\n    if (!elem.getBoundingClientRect) {\n        return false;\n    }\n    const rect = elem.getBoundingClientRect();\n    const windowHeight = (window.innerHeight || document.documentElement.clientHeight);\n    const windowWidth = (window.innerWidth || document.documentElement.clientWidth);\n    const vertInView = (rect.top <= windowHeight) && ((rect.top + rect.height) > 0);\n    const horInView = (rect.left <= windowWidth) && ((rect.left + rect.width) > 0);\n    return (vertInView && horInView);\n}).apply(null, arguments)",
+  "args": [
+    {
+      "element-6066-11e4-a52e-4f735466cecf": "f.EF1BBCBF9CEEA1C8A98F9327A8F59D6E.d.255518BAFF9D5340BA6B841D4B98DB2A.e.73",
+      "ELEMENT": "f.EF1BBCBF9CEEA1C8A98F9327A8F59D6E.d.255518BAFF9D5340BA6B841D4B98DB2A.e.73"
+    }
+  ]
+}
