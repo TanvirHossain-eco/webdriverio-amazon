@@ -290,5 +290,4 @@ describe('Example 5 & 6', () => {
         // await browser.debug()
 
     });
-
 });

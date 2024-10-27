@@ -6,17 +6,17 @@
 describe('Example 7 & 8', () => {
     
 
-    it('TCE701', async() => {
-        await browser.maximizeWindow()
-        await browser.url('https://run.plnkr.co/plunks/RpYnoSbkkHidZ08d/')
-        await browser.pause(3000)
-        await $('button=Proceed').click()
-        console.log(await $('#heading').getText())
-        console.log(await $('#container').shadow$('#inside').getText())
-        await browser.pause(3000)
-        // await browser.debug()
+    // it('TCE701', async() => {
+    //     await browser.maximizeWindow()
+    //     await browser.url('https://run.plnkr.co/plunks/RpYnoSbkkHidZ08d/')
+    //     await browser.pause(3000)
+    //     await $('button=Proceed').click()
+    //     console.log(await $('#heading').getText())
+    //     console.log(await $('#container').shadow$('#inside').getText())
+    //     await browser.pause(3000)
+    //     // await browser.debug()
 
-    });
+    // });
     // Getting Element Property
     it('TCE702', async() => {
         await browser.maximizeWindow()
